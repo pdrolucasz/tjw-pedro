@@ -2,51 +2,81 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Index</title>
+	<title>Alunos</title>
 	<div th:replace="fragments/head"></div>
+
+	<style>
+		.custom-table {
+			color: #fff;
+		}
+
+		.table-card {
+			background-color: #222;
+			padding: 0.625rem;
+			border-radius: 0.5rem;
+		}
+	</style>
 </head>
 
 <body>
-	<div id="app">
-		<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/sidebar"></div>
 
-		<div id="main" class="container mt-4">
-			<div class="row">
-				<div th:replace="fragments/sidebar"></div>
-				<div class="col-md-9">
-					<h1>Listagem de Alunos</h1>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Idade</th>
-								<th>Email</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Aluno 1</td>
-								<td>20</td>
-								<td>aluno1@example.com</td>
-							</tr>
-							<tr>
-								<td>Aluno 2</td>
-								<td>22</td>
-								<td>aluno2@example.com</td>
-							</tr>
-							<tr>
-								<td>Aluno 3</td>
-								<td>18</td>
-								<td>aluno3@example.com</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+	<div th:replace="fragments/header"></div>
+
+	<div class="container">
+		<div class="row mt-4">
+			<div class="col-md-8">
+				<h2>Alunos</h2>
 			</div>
+			<div class="col-md-4 text-right">
+				<a href="/cadastro" class="btn btn-success">
+					<i class="fas fa-plus"></i> Novo
+				</a>
+			</div>
+		</div>
+		<div class="table-card">
+			<table class="table mt-4 custom-table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>E-mail</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
 	<div th:replace="fragments/scripts"></div>
+	<script>
+		fetch('http://localhost:8080/students')
+			.then(response => response.json())
+			.then(data => {
+				data.forEach(student => {
+					const row = document.createElement('tr');
+					row.innerHTML = `
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+						<td>
+							<a href="/editar/${student.id}" class="btn btn-sm btn-primary">
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+							<a href="#" class="btn btn-sm btn-danger">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+                    `;
+					document.querySelector('tbody').appendChild(row);
+				});
+			})
+			.catch(error => {
+				console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
+			});
+	</script>
 </body>
 
 </html>
