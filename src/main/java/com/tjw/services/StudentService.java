@@ -8,7 +8,7 @@ import com.tjw.entities.Student;
 public interface StudentService extends JpaRepository<Student, Long> {
 	public Student findByIdVerify(Long id);
 
-	public void update(Long id, Student studentDto);
+	public void update(Long id, Student student);
 
 	public StudentDto findByIdAndClasses(Long id);
 }

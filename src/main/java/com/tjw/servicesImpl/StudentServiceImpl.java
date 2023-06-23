@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Service;
 
 import com.tjw.dtos.response.ClasseDto;
 import com.tjw.dtos.response.StudentDto;
@@ -15,6 +16,7 @@ import com.tjw.services.StudentService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
+@Service
 public class StudentServiceImpl extends SimpleJpaRepository<Student, Long> implements StudentService {
 	public StudentServiceImpl(EntityManager entityManager) {
 		super(Student.class, entityManager);
@@ -27,13 +29,13 @@ public class StudentServiceImpl extends SimpleJpaRepository<Student, Long> imple
 
 	@Override
 	@Transactional
-	public void update(Long id, Student studentDto) {
-		Student student = this.findByIdVerify(id);
+	public void update(Long id, Student student) {
+		Student studentFind = this.findByIdVerify(id);
 
-		student.setName(studentDto.getName());
-		student.setEmail(studentDto.getEmail());
+		studentFind.setName(student.getName());
+		studentFind.setEmail(student.getEmail());
 
-		this.save(student);
+		this.save(studentFind);
 	}
 
 	@Override

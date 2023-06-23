@@ -1,0 +1,11 @@
+<div th:fragment="sidebar">
+	<div class="col-md-3">
+		<div class="sidebar">
+			<a class="nav-link ${currentPage == 'home' ? 'active bg-primary' : ''}" href="/">Home</a>
+			<a class="nav-link ${currentPage == 'alunos' ? 'active bg-primary' : ''}" href="/alunos">Alunos</a>
+			<a class="nav-link ${currentPage == 'professores' ? 'active bg-primary' : ''}"
+				href="/professores">Professores</a>
+			<a class="nav-link ${currentPage == 'turmas' ? 'active bg-primary' : ''}" href="/turmas">Turmas</a>
+		</div>
+	</div>
+</div>

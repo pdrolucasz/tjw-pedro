@@ -2,13 +2,14 @@ package com.tjw.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -31,8 +32,10 @@ public class Student {
 	@Column(nullable = false)
 	private String email;
 
-	@ManyToMany
-	@JoinTable(name = "students_classes", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "classe_id"))
+	@ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	// @JoinTable(name = "students_classes", joinColumns = @JoinColumn(name =
+	// "student_id"), inverseJoinColumns = @JoinColumn(name = "classe_id"))
 	private Set<Classe> classes;
 
 	@Deprecated

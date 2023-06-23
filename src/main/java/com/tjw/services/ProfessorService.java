@@ -8,7 +8,7 @@ import com.tjw.entities.Professor;
 public interface ProfessorService extends JpaRepository<Professor, Long> {
 	public Professor findByIdVerify(Long id);
 
-	public void update(Long id, Professor professorDto);
+	public void update(Long id, Professor professor);
 
 	public ProfessorDto findByIdAndClasses(Long id);
 }

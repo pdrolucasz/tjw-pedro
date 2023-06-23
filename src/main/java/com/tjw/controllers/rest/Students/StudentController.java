@@ -1,4 +1,4 @@
-package com.tjw.controllers.Students;
+package com.tjw.controllers.rest.Students;
 
 import java.util.List;
 

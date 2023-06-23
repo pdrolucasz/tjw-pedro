@@ -1,4 +1,4 @@
-package com.tjw.controllers.Classes;
+package com.tjw.controllers.rest.Classes;
 
 import java.util.List;
 

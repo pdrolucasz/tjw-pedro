@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Service;
 
 import com.tjw.dtos.response.ClasseDto;
 import com.tjw.dtos.response.ProfessorDto;
@@ -15,6 +16,7 @@ import com.tjw.services.ProfessorService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
+@Service
 public class ProfessorServiceImpl extends SimpleJpaRepository<Professor, Long> implements ProfessorService {
 	public ProfessorServiceImpl(EntityManager entityManager) {
 		super(Professor.class, entityManager);
@@ -27,13 +29,13 @@ public class ProfessorServiceImpl extends SimpleJpaRepository<Professor, Long> i
 
 	@Override
 	@Transactional
-	public void update(Long id, Professor professorDto) {
-		Professor professor = this.findByIdVerify(id);
+	public void update(Long id, Professor professor) {
+		Professor professorFind = this.findByIdVerify(id);
 
-		professor.setName(professorDto.getName());
-		professor.setEmail(professorDto.getEmail());
+		professorFind.setName(professor.getName());
+		professorFind.setEmail(professor.getEmail());
 
-		this.save(professor);
+		this.save(professorFind);
 	}
 
 	@Override
