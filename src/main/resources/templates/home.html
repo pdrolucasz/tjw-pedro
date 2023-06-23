@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
 <head>
 	<title>Home</title>
-	<div th:replace="fragments/head"></div>
+	<div th:replace="~{fragments/head}"></div>
 </head>
 
 <body>
-	<div th:replace="fragments/sidebar"></div>
+	<div th:replace="~{fragments/sidebar}"></div>
 
-	<div th:replace="fragments/header"></div>
+	<div th:replace="~{fragments/header}"></div>
 
 	<div class="container">
 		<h1>Bem-vindo à página inicial</h1>
 		<p>Esta é a página inicial do seu projeto.</p>
 	</div>
 
-	<div th:replace="fragments/scripts"></div>
+	<div th:replace="~{fragments/scripts}"></div>
 </body>
 
 </html>

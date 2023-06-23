@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,9 +28,9 @@ public class ProfessorController {
 	}
 
 	@PostMapping
-	public Professor store(@RequestBody Professor professor) {
-		Professor response = service.save(professor);
-		return response;
+	public String store(Professor professor) {
+		service.save(professor);
+		return "redirect:/professores";
 	}
 
 	@GetMapping(value = "/{id}")
@@ -41,8 +40,9 @@ public class ProfessorController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public void update(@PathVariable Long id, @RequestBody Professor professor) {
+	public String update(@PathVariable Long id, Professor professor) {
 		service.update(id, professor);
+		return "redirect:/professores";
 	}
 
 	@DeleteMapping(value = "/{id}")

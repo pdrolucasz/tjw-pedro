@@ -1,27 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
 <head>
 	<title>Alunos</title>
-	<div th:replace="fragments/head"></div>
-
-	<style>
-		.custom-table {
-			color: #fff;
-		}
-
-		.table-card {
-			background-color: #222;
-			padding: 0.625rem;
-			border-radius: 0.5rem;
-		}
-	</style>
+	<div th:replace="~{fragments/head}"></div>
 </head>
 
 <body>
-	<div th:replace="fragments/sidebar"></div>
+	<div th:replace="~{fragments/sidebar}"></div>
 
-	<div th:replace="fragments/header"></div>
+	<div th:replace="~{fragments/header}"></div>
 
 	<div class="container">
 		<div class="row mt-4">
@@ -29,12 +17,12 @@
 				<h2>Alunos</h2>
 			</div>
 			<div class="col-md-4 text-right">
-				<a href="/cadastro" class="btn btn-success">
+				<a href="/alunos/cadastrar" class="btn btn-success">
 					<i class="fas fa-plus"></i> Novo
 				</a>
 			</div>
 		</div>
-		<div class="table-card">
+		<div class="card-container">
 			<table class="table mt-4 custom-table">
 				<thead>
 					<tr>
@@ -50,7 +38,7 @@
 		</div>
 	</div>
 
-	<div th:replace="fragments/scripts"></div>
+	<div th:replace="~{fragments/scripts}"></div>
 	<script>
 		fetch('http://localhost:8080/students')
 			.then(response => response.json())
@@ -65,7 +53,7 @@
 							<a href="/editar/${student.id}" class="btn btn-sm btn-primary">
 								<i class="fas fa-pencil-alt"></i>
 							</a>
-							<a href="#" class="btn btn-sm btn-danger">
+							<a href="#" class="btn btn-sm btn-danger" onclick="deleteStudent(${student.id})">
 								<i class="fas fa-trash"></i>
 							</a>
 						</td>
@@ -76,6 +64,27 @@
 			.catch(error => {
 				console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
 			});
+		// <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-sm btn-danger" role="button">
+		// 					<i class="fas fa-trash"></i>
+		// 				</a>
+
+		function deleteStudent(id) {
+			if (confirm('Deseja realmente excluir este aluno?')) {
+				fetch(`/students/${id}`, {
+					method: 'DELETE'
+				})
+					.then(response => {
+						if (response.ok) {
+							location.reload();
+						} else {
+							console.error('Ocorreu um erro ao excluir o aluno.');
+						}
+					})
+					.catch(error => {
+						console.error('Ocorreu um erro ao excluir o aluno:', error);
+					});
+			}
+		}
 	</script>
 </body>
 

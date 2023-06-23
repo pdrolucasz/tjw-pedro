@@ -12,10 +12,4 @@ public class HomeController {
 		model.addAttribute("currentPage", "home");
 		return "home";
 	}
-
-	@GetMapping("/alunos")
-	public String alunos(Model model) {
-		model.addAttribute("currentPage", "alunos");
-		return "alunos";
-	}
 }
