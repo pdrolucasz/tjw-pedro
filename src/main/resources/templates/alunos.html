@@ -23,7 +23,13 @@
 			</div>
 		</div>
 		<div class="card-container">
-			<table class="table mt-4 custom-table">
+			<div class="col-md-6 offset-md-6 text-end">
+				<div class="input-group">
+					<input type="text" id="searchInput" class="form-control" placeholder="Pesquisar por email"
+						oninput="handleSearchInput()">
+				</div>
+			</div>
+			<table class="table mt-4">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -50,7 +56,7 @@
                         <td>${student.name}</td>
                         <td>${student.email}</td>
 						<td>
-							<a href="/editar/${student.id}" class="btn btn-sm btn-primary">
+							<a href="/alunos/${student.id}" class="btn btn-sm btn-primary">
 								<i class="fas fa-pencil-alt"></i>
 							</a>
 							<a href="#" class="btn btn-sm btn-danger" onclick="deleteStudent(${student.id})">
@@ -64,9 +70,6 @@
 			.catch(error => {
 				console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
 			});
-		// <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-sm btn-danger" role="button">
-		// 					<i class="fas fa-trash"></i>
-		// 				</a>
 
 		function deleteStudent(id) {
 			if (confirm('Deseja realmente excluir este aluno?')) {
@@ -84,6 +87,47 @@
 						console.error('Ocorreu um erro ao excluir o aluno:', error);
 					});
 			}
+		}
+
+		let searchTimeout;
+
+		function handleSearchInput() {
+			clearTimeout(searchTimeout);
+			searchTimeout = setTimeout(searchStudents, 1000); // Tempo de espera de 1000ms (1s)
+		}
+
+		function searchStudents() {
+			const searchInput = document.getElementById('searchInput');
+			const searchTerm = searchInput.value;
+
+			fetch(`/students/search?email=${searchTerm}`)
+				.then(response => response.json())
+				.then(data => {
+					// Limpar a tabela existente
+					const tbody = document.querySelector('tbody');
+					tbody.innerHTML = '';
+
+					data.forEach(student => {
+						const row = document.createElement('tr');
+						row.innerHTML = `
+										<td>${student.id}</td>
+										<td>${student.name}</td>
+										<td>${student.email}</td>
+										<td>
+											<a href="/alunos/${student.id}" class="btn btn-sm btn-primary">
+												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="deleteStudent(${student.id})">
+												<i class="fas fa-trash"></i>
+											</a>
+										</td>
+									`;
+						tbody.appendChild(row);
+					});
+				})
+				.catch(error => {
+					console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
+				});
 		}
 	</script>
 </body>

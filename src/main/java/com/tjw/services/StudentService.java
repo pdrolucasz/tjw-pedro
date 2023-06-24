@@ -1,5 +1,7 @@
 package com.tjw.services;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tjw.dtos.response.StudentDto;
@@ -11,4 +13,6 @@ public interface StudentService extends JpaRepository<Student, Long> {
 	public void update(Long id, Student student);
 
 	public StudentDto findByIdAndClasses(Long id);
+
+	List<Student> searchByEmail(String email);
 }

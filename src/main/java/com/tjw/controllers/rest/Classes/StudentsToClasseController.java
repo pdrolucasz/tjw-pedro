@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.tjw.servicesImpl.ClasseServiceImpl;
 
 @RestController
@@ -14,8 +16,8 @@ public class StudentsToClasseController {
 	private ClasseServiceImpl service;
 
 	@PutMapping(value = "/alunos/{id}")
-	public String update(@PathVariable Long id, Long[] students) {
+	public ModelAndView update(@PathVariable Long id, Long[] students) {
 		service.enroll(id, students);
-		return "redirect:/turmas";
+		return new ModelAndView("redirect:/turmas");
 	}
 }

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tjw.dtos.response.StudentDto;
 import com.tjw.entities.Student;
@@ -27,10 +29,15 @@ public class StudentController {
 		return response;
 	}
 
+	@GetMapping("/search")
+	public List<Student> searchByEmail(@RequestParam("email") String email) {
+		return service.searchByEmail(email);
+	}
+
 	@PostMapping
-	public String store(Student student) {
+	public ModelAndView store(Student student) {
 		service.save(student);
-		return "redirect:/alunos";
+		return new ModelAndView("redirect:/alunos");
 	}
 
 	@GetMapping(value = "/{id}")
@@ -40,9 +47,9 @@ public class StudentController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public String update(@PathVariable Long id, Student student) {
+	public ModelAndView update(@PathVariable Long id, Student student) {
 		service.update(id, student);
-		return "redirect:/alunos";
+		return new ModelAndView("redirect:/alunos");
 	}
 
 	@DeleteMapping(value = "/{id}")

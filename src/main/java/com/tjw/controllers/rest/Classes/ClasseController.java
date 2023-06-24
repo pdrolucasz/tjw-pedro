@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tjw.dtos.response.ClasseDto;
 import com.tjw.entities.Classe;
@@ -28,9 +29,9 @@ public class ClasseController {
 	}
 
 	@PostMapping
-	public String store(Classe classe) {
+	public ModelAndView store(Classe classe) {
 		service.save(classe);
-		return "redirect:/turmas";
+		return new ModelAndView("redirect:/turmas");
 	}
 
 	@GetMapping(value = "/{id}")
@@ -40,9 +41,9 @@ public class ClasseController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public String update(@PathVariable Long id, Classe classe) {
+	public ModelAndView update(@PathVariable Long id, Classe classe) {
 		service.update(id, classe);
-		return "redirect:/turmas";
+		return new ModelAndView("redirect:/turmas");
 	}
 
 	@DeleteMapping(value = "/{id}")
