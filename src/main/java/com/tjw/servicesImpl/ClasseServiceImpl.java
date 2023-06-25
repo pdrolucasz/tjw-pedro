@@ -23,9 +23,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class ClasseServiceImpl extends SimpleJpaRepository<Classe, Long> implements ClasseService {
 	@Autowired
-	private StudentServiceImpl studentService;
-
-	@Autowired
 	private ClasseRepository classeRepository;
 
 	public ClasseServiceImpl(EntityManager entityManager) {
@@ -80,14 +77,14 @@ public class ClasseServiceImpl extends SimpleJpaRepository<Classe, Long> impleme
 
 	@Override
 	@Transactional
-	public void enroll(Long id, Long[] students) {
+	public void enroll(Long id, Set<Student> students) {
 		Classe classe = this.findByIdVerify(id);
-		Set<Student> studentsSave = new HashSet<>();
-		for (Long studentId : students) {
-			Student student = this.studentService.findByIdVerify(studentId);
-			studentsSave.add(student);
-		}
-		classe.getStudents().addAll(studentsSave);
+		// Set<Student> studentsSave = new HashSet<>();
+		// for (Long studentId : students) {
+		// Student student = this.studentService.findByIdVerify(studentId);
+		// studentsSave.add(student);
+		// }
+		classe.getStudents().addAll(students);
 
 		this.save(classe);
 	}

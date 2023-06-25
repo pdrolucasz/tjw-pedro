@@ -45,4 +45,12 @@ public class TurmasController {
 		model.addAttribute("currentPage", "turmas");
 		return "editar-turma";
 	}
+
+	@GetMapping("/matricula/{id}")
+	public String matricularAlunos(@PathVariable Long id, Model model) {
+		ClasseDto response = service.findByIdAndStudents(id);
+		model.addAttribute("classe", response);
+		model.addAttribute("currentPage", "turmas");
+		return "enroll-students";
+	}
 }

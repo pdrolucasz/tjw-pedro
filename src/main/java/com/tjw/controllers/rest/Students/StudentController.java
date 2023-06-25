@@ -34,6 +34,11 @@ public class StudentController {
 		return service.searchByEmail(email);
 	}
 
+	@GetMapping("/first")
+	public Student findOneByEmail(@RequestParam("email") String email) {
+		return service.findOneByEmail(email);
+	}
+
 	@PostMapping
 	public ModelAndView store(Student student) {
 		service.save(student);

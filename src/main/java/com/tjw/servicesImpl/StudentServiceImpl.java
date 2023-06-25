@@ -13,6 +13,7 @@ import com.tjw.dtos.response.StudentDto;
 import com.tjw.entities.Classe;
 import com.tjw.entities.Student;
 import com.tjw.repositories.StudentRepository;
+import com.tjw.serviceExceptions.EmailNotFoundException;
 import com.tjw.serviceExceptions.NotFoundException;
 import com.tjw.services.StudentService;
 
@@ -69,5 +70,10 @@ public class StudentServiceImpl extends SimpleJpaRepository<Student, Long> imple
 	@Override
 	public List<Student> searchByEmail(String email) {
 		return this.studentRepository.findByEmailContaining(email);
+	}
+
+	@Override
+	public Student findOneByEmail(String email) {
+		return this.studentRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException(email));
 	}
 }
