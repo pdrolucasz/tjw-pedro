@@ -1,5 +1,7 @@
 package com.tjw.services;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tjw.dtos.response.ClasseDto;
@@ -13,4 +15,6 @@ public interface ClasseService extends JpaRepository<Classe, Long> {
 	public ClasseDto findByIdAndStudents(Long id);
 
 	public void enroll(Long id, Long[] students);
+
+	List<Classe> searchByName(String name);
 }

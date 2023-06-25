@@ -15,7 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
+// import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +26,7 @@ import lombok.Setter;
 public class Classe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Setter(AccessLevel.NONE)
+	// @Setter(AccessLevel.NONE)
 	private Long id;
 
 	@Column(nullable = false, unique = true)

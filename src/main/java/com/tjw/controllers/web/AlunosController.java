@@ -31,7 +31,7 @@ public class AlunosController {
 	@GetMapping("/{id}")
 	public String editarAlunos(@PathVariable Long id, Model model) {
 		StudentDto response = service.findByIdAndClasses(id);
-		model.addAttribute("aluno", response);
+		model.addAttribute("student", response);
 		model.addAttribute("currentPage", "alunos");
 		return "editar-aluno";
 	}

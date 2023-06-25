@@ -1,6 +1,7 @@
 package com.tjw.servicesImpl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.tjw.dtos.response.ProfessorDto;
 import com.tjw.dtos.response.StudentDto;
 import com.tjw.entities.Classe;
 import com.tjw.entities.Student;
+import com.tjw.repositories.ClasseRepository;
 import com.tjw.serviceExceptions.NotFoundException;
 import com.tjw.services.ClasseService;
 
@@ -22,6 +24,9 @@ import jakarta.transaction.Transactional;
 public class ClasseServiceImpl extends SimpleJpaRepository<Classe, Long> implements ClasseService {
 	@Autowired
 	private StudentServiceImpl studentService;
+
+	@Autowired
+	private ClasseRepository classeRepository;
 
 	public ClasseServiceImpl(EntityManager entityManager) {
 		super(Classe.class, entityManager);
@@ -85,5 +90,10 @@ public class ClasseServiceImpl extends SimpleJpaRepository<Classe, Long> impleme
 		classe.getStudents().addAll(studentsSave);
 
 		this.save(classe);
+	}
+
+	@Override
+	public List<Classe> searchByName(String name) {
+		return this.classeRepository.findByNameContaining(name);
 	}
 }
