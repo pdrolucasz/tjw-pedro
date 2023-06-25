@@ -22,7 +22,6 @@ public class StudentsToClasseController {
 
 	@PutMapping(value = "/students/{id}")
 	public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Set<Student> students) {
-		System.out.println(students);
 		service.enroll(id, students);
 		String redirectUrl = "/turmas";
 		return ResponseEntity.status(HttpStatus.OK).body("{\"redirect\": \"" + redirectUrl + "\"}");

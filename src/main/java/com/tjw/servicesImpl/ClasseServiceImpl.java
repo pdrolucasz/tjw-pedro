@@ -79,11 +79,8 @@ public class ClasseServiceImpl extends SimpleJpaRepository<Classe, Long> impleme
 	@Transactional
 	public void enroll(Long id, Set<Student> students) {
 		Classe classe = this.findByIdVerify(id);
-		// Set<Student> studentsSave = new HashSet<>();
-		// for (Long studentId : students) {
-		// Student student = this.studentService.findByIdVerify(studentId);
-		// studentsSave.add(student);
-		// }
+		classe.getStudents().removeIf(student -> !students.contains(student));
+
 		classe.getStudents().addAll(students);
 
 		this.save(classe);

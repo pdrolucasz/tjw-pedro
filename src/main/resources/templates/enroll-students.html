@@ -56,6 +56,23 @@
 	<script>
 		const students = [];
 
+		document.addEventListener('DOMContentLoaded', function () {
+			fetch(`/classes/[[${classe.id}]]`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Erro ao obter os alunos matriculados.');
+					}
+					return response.json();
+				})
+				.then(data => {
+					students.push(...data.students)
+					atualizarTabelaAlunos()
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		});
+
 		function adicionarAluno() {
 			const emailInput = document.getElementById('email');
 			const email = emailInput.value.trim();
