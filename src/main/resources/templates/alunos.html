@@ -50,7 +50,7 @@
 			.then(response => response.json())
 			.then(data => {
 				data.forEach(student => {
-					const row = document.createElement('tr');
+					const row = document.createElement('tr')
 					row.innerHTML = `
                         <td>${student.id}</td>
                         <td>${student.name}</td>
@@ -66,13 +66,13 @@
 								<i class="fas fa-trash"></i>
 							</a>
 						</td>
-                    `;
-					document.querySelector('tbody').appendChild(row);
-				});
+                    `
+					document.querySelector('tbody').appendChild(row)
+				})
 			})
 			.catch(error => {
-				console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
-			});
+				console.error('Ocorreu um erro ao obter os dados dos alunos:', error)
+			})
 
 		function deleteStudent(id) {
 			if (confirm('Deseja realmente excluir este aluno?')) {
@@ -81,37 +81,37 @@
 				})
 					.then(response => {
 						if (response.ok) {
-							location.reload();
+							location.reload()
 						} else {
-							console.error('Ocorreu um erro ao excluir o aluno.');
+							console.error('Ocorreu um erro ao excluir o aluno.')
 						}
 					})
 					.catch(error => {
-						console.error('Ocorreu um erro ao excluir o aluno:', error);
-					});
+						console.error('Ocorreu um erro ao excluir o aluno:', error)
+					})
 			}
 		}
 
-		let searchTimeout;
+		let searchTimeout
 
 		function handleSearchInput() {
-			clearTimeout(searchTimeout);
-			searchTimeout = setTimeout(searchStudents, 1000); // Tempo de espera de 1000ms (1s)
+			clearTimeout(searchTimeout)
+			searchTimeout = setTimeout(searchStudents, 1000) // Tempo de espera de 1000ms (1s)
 		}
 
 		function searchStudents() {
-			const searchInput = document.getElementById('searchInput');
-			const searchTerm = searchInput.value;
+			const searchInput = document.getElementById('searchInput')
+			const searchTerm = searchInput.value
 
 			fetch(`/students/search?email=${searchTerm}`)
 				.then(response => response.json())
 				.then(data => {
 					// Limpar a tabela existente
-					const tbody = document.querySelector('tbody');
-					tbody.innerHTML = '';
+					const tbody = document.querySelector('tbody')
+					tbody.innerHTML = ''
 
 					data.forEach(student => {
-						const row = document.createElement('tr');
+						const row = document.createElement('tr')
 						row.innerHTML = `
 										<td>${student.id}</td>
 										<td>${student.name}</td>
@@ -127,13 +127,13 @@
 												<i class="fas fa-trash"></i>
 											</a>
 										</td>
-									`;
-						tbody.appendChild(row);
-					});
+									`
+						tbody.appendChild(row)
+					})
 				})
 				.catch(error => {
-					console.error('Ocorreu um erro ao obter os dados dos alunos:', error);
-				});
+					console.error('Ocorreu um erro ao obter os dados dos alunos:', error)
+				})
 		}
 	</script>
 </body>
