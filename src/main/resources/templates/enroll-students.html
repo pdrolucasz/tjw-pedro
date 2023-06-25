@@ -42,7 +42,6 @@
 					</tr>
 				</thead>
 				<tbody id="students-table-body">
-					<!-- Alunos adicionados serão exibidos aqui -->
 				</tbody>
 			</table>
 			<div class="text-right">
@@ -55,8 +54,6 @@
 
 	<script>
 		const students = []
-
-		console.log(`[[${classe.students}]]`)
 
 		document.addEventListener('DOMContentLoaded', function () {
 			fetch(`/classes/[[${classe.id}]]`)
@@ -146,7 +143,7 @@
 				const acoesCell = document.createElement('td')
 				const removerBtn = document.createElement('button')
 				removerBtn.classList.add('btn', 'btn-danger')
-				removerBtn.innerHTML = '<i class="fas fa-trash"></i>' // Ícone de lixeira
+				removerBtn.innerHTML = '<i class="fas fa-trash"></i>'
 				removerBtn.addEventListener('click', () => removerAluno(student.id))
 				acoesCell.appendChild(removerBtn)
 				row.appendChild(acoesCell)
@@ -173,7 +170,6 @@
 				})
 				.then(data => {
 					if (data.redirect) {
-						// Redireciona para a página desejada
 						window.location.href = data.redirect
 					}
 				})
