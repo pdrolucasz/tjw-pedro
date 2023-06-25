@@ -59,6 +59,9 @@
 							<a href="/professores/${professor.id}" class="btn btn-sm btn-primary">
 								<i class="fas fa-pencil-alt"></i>
 							</a>
+							<a href="/professores/turmas/${professor.id}" class="btn btn-sm btn-success">
+								<i class="fas fa-user-plus"></i>
+							</a>
 							<a href="#" class="btn btn-sm btn-danger" onclick="deleteStudent(${professor.id})">
 								<i class="fas fa-trash"></i>
 							</a>
@@ -116,6 +119,9 @@
 										<td>
 											<a href="/professores/${professor.id}" class="btn btn-sm btn-primary">
 												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a href="/professores/turmas/${professor.id}" class="btn btn-sm btn-success">
+												<i class="fas fa-user-plus"></i>
 											</a>
 											<a href="#" class="btn btn-sm btn-danger" onclick="deleteStudent(${professor.id})">
 												<i class="fas fa-trash"></i>

@@ -35,4 +35,12 @@ public class AlunosController {
 		model.addAttribute("currentPage", "alunos");
 		return "editar-aluno";
 	}
+
+	@GetMapping("/turmas/{id}")
+	public String matricularAlunos(@PathVariable Long id, Model model) {
+		StudentDto response = service.findByIdAndClasses(id);
+		model.addAttribute("student", response);
+		model.addAttribute("currentPage", "alunos");
+		return "alunos-turmas";
+	}
 }

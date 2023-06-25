@@ -35,4 +35,12 @@ public class ProfessoresController {
 		model.addAttribute("currentPage", "professores");
 		return "editar-professor";
 	}
+
+	@GetMapping("/turmas/{id}")
+	public String matricularAlunos(@PathVariable Long id, Model model) {
+		ProfessorDto response = service.findByIdAndClasses(id);
+		model.addAttribute("professor", response);
+		model.addAttribute("currentPage", "professores");
+		return "professores-turmas";
+	}
 }
