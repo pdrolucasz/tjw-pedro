@@ -32,7 +32,6 @@
 					<label for="professor" class="form-label">Professor:</label>
 					<select id="professor" name="professor" class="form-control" required>
 						<option value="">Selecione um professor</option>
-						<!-- Iteração sobre a lista de professores -->
 						<option th:each="professor : ${professors}" th:value="${professor.id}"
 							th:text="${professor.name}"></option>
 					</select>
